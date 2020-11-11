@@ -23,6 +23,10 @@ public class BaseTest {
         webDriver.manage().window().maximize();
     }
 
+    public void goToLandingPage() {
+        webDriver.get("http://school-for-automation.tech/");
+    }
+
     @AfterTest
     public void tearDown() {
         webDriver.close();

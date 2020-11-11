@@ -1,28 +1,29 @@
 package tech.schoolforautomation.tests;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import tech.schoolforautomation.base.BaseTest;
 import tech.schoolforautomation.pages.LoginPage;
 
-public class LoginPageTest extends BaseTest {
+public class SuccessfulLoginTest extends BaseTest {
 
     @Test
-    public void loginPageTest() {
-        logger.info("Go to Login Page");
-        getWebDriver().get("http://school-for-automation.tech");
+    public void successfulLoginTest() {
+        logger.info("Go to Landing Page");
+        goToLandingPage();
 
-        logger.info("Enter credentials");
+        logger.info("Create LoginPage object and log in a valid user");
         LoginPage loginPage = new LoginPage(getWebDriver());
         loginPage.login("tester", "test1234");
 
-        logger.info("Verify the Get Started button");
+        logger.info("Verify login was successful");
         WebElement getStartedButton = new WebDriverWait(getWebDriver(), 3)
-                .until(webDriver -> webDriver.findElement(By.id("get-started")));
+                .until(ExpectedConditions.elementToBeClickable(By.id("get-started")));
         Assert.assertTrue(getStartedButton.isDisplayed());
     }
 }
